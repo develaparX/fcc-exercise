@@ -1,35 +1,29 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
     const userInput = document.getElementById('user-input');
     const checkBtn = document.getElementById('check-btn');
     const clearBtn = document.getElementById('clear-btn');
     const resultsDiv = document.getElementById('results-div');
 
     checkBtn.addEventListener('click', validatePhoneNumber);
-    clearBtn.addEventListener('click', clearInput);
+    clearBtn.addEventListener('click', clearResults);
 
     function validatePhoneNumber() {
-        const phoneNumber = userInput.value.replace(/\D/g, '');
-        const phoneRegex = /^(1\s?)?(\(\d{3}\)|\d{3})[\s.-]?\d{3}[\s.-]?\d{4}$/;
-
-        if (phoneRegex.test(userInput.value)) {
-            resultsDiv.textContent = `Valid US number: ${formatPhoneNumber(phoneNumber)}`;
-        } else {
-            resultsDiv.textContent = `Invalid US number: ${userInput.value}`;
+        const phoneNumber = userInput.value.trim();
+        if (phoneNumber === '') {
+            alert('Please provide a phone number');
+            return;
         }
+
+        const regex = /^(1\s?)?(\(\d{3}\)|\d{3})[\s.-]?\d{3}[\s.-]?\d{4}$/;
+        const isValid = regex.test(phoneNumber);
+        
+        resultsDiv.textContent = isValid 
+            ? `Valid US number: ${phoneNumber}`
+            : `Invalid US number: ${phoneNumber}`;
     }
 
-    function clearInput() {
+    function clearResults() {
         userInput.value = '';
         resultsDiv.textContent = '';
-    }
-
-    function formatPhoneNumber(phoneNumber) {
-        const cleaned = phoneNumber.replace(/\D/g, '');
-        const match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
-        if (match) {
-            const intlCode = match[1] ? '+1 ' : '';
-            return [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('');
-        }
-        return phoneNumber;
     }
 });
