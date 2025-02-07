@@ -1,0 +1,11 @@
+
+
+.quote-box{
+  background-color: blue;
+  width: 480px;
+  height: 250px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
