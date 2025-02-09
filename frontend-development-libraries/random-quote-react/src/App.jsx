@@ -37,7 +37,7 @@ function App() {
   return (
     <div className='quote-box' style={styles.container}>
       <p style={styles.quote}>{loading ? 'Loading...' : `"${quote}"`}</p>
-      {author && <h4 style={styles.author}>- {author}</h4>}
+      {author && <h4 style={styles.author}>-- {author} --</h4>}
       <button onClick={fetchQuote} style={styles.button} disabled={loading}>
         {loading ? 'Fetching...' : 'New Quote'}
       </button>
@@ -66,7 +66,8 @@ const styles = {
   author: {
     fontSize: '1rem',
     marginTop: '10px',
-    color: '#555',
+    color: 'white',
+
   },
   button: {
     marginTop: '20px',
